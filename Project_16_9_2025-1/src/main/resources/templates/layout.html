@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title layout:title-pattern="$CONTENT_TITLE - Project 16-9-2025"></title> <!-- Sửa tại đây -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-dark text-white p-3">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <img th:src="@{/images/default-avatar.jpg}" alt="Your Photo" style="width: 50px; height: 50px; border-radius: 50%;" class="me-3">
+                <h4>Project 17-9-2025</h4>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main layout:fragment="content">
+        <!-- Nội dung sẽ được thay thế bởi các trang con -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center p-3 mt-5">
+        <p>Developed by: Huỳnh Hoài Bảo - Student ID: 23110178 - 2025</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

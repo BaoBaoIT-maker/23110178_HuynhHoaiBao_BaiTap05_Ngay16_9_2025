@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout}">
+<head>
+    <title>Manager Home</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <div class="bg-primary text-white text-center py-5 mb-4">
+        <div class="container">
+            <h1 class="display-4 fw-bold">👨‍💼 Xin chào Manager, <span th:text="${session.account.fullName}"></span></h1>
+            <p class="lead">Trang quản lý dành cho Manager</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="fw-bold">Chức năng</h5>
+                <ul>
+                    <li>Quản lý nhân viên</li>
+                    <li>Theo dõi danh mục</li>
+                    <li>Báo cáo nhanh</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

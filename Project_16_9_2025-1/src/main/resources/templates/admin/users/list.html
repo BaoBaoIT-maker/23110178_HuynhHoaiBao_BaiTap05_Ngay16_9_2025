@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{user/layout}">
+<head>
+    <title>User List</title>
+</head>
+<body>
+<main layout:fragment="content" class="container mt-4">
+    <h2>User List</h2>
+
+    <!-- Search -->
+    <form th:action="@{/admin/users}" method="get" class="d-flex mb-3">
+        <input type="text" name="username" th:value="${username}" placeholder="Search by username" class="form-control me-2">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <!-- Flash message -->
+    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+
+    <!-- Table -->
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.role}"></td>
+            <td>
+                <a th:href="@{'/admin/users/view/' + ${user.id}}" class="btn btn-info btn-sm">View</a>
+                <a th:href="@{'/admin/users/edit/' + ${user.id}}" class="btn btn-warning btn-sm">Edit</a>
+                <a th:href="@{'/admin/users/delete/' + ${user.id}}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <nav>
+        <ul class="pagination">
+            <li th:each="i : ${#numbers.sequence(0, totalPages-1)}"
+                th:classappend="${i == currentPage} ? 'active'" class="page-item">
+                <a th:href="@{'/admin/users?(page=' + ${i} + ')'}" class="page-link" th:text="${i+1}"></a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Add button -->
+    <a th:href="@{/admin/users/add}" class="btn btn-success">Add New User</a>
+</main>
+</body>
+</html>

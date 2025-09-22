@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout}">
+<head>
+    <title>View Category</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">Category Details</h4>
+                </div>
+                <div class="card-body">
+                    <p><strong>ID:</strong> <span th:text="${category.id}"></span></p>
+                    <p><strong>Name:</strong> <span th:text="${category.categoryName}"></span></p>
+                    <a th:href="@{/admin/categories}" class="btn btn-secondary">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
