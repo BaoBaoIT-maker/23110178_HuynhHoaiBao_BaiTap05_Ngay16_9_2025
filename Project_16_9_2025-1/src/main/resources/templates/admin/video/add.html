@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Thêm Video</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <div class="container mt-4">
+        <h2>Thêm Video</h2>
+        <form th:action="@{/admin/video/save}" th:object="${video}" method="post" enctype="multipart/form-data">
+            
+            <input type="hidden" th:field="*{id}"/> 
+
+            <div class="mb-3">
+                <label>Tiêu đề</label>
+                <input type="text" th:field="*{title}" class="form-control" required/>
+            </div>
+            
+            <div class="mb-3">
+                <label>Danh mục</label>
+                <select name="category.id" class="form-select" required> 
+                    <option value="">-- Chọn danh mục --</option>
+                    <option th:each="c : ${categories}" 
+                            th:value="${c.id}" 
+                            th:text="${c.name}"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label>File video (mp4)</label>
+                <input type="file" name="file" class="form-control" accept="video/mp4" required/> 
+            </div>
+            
+            <div class="mb-3">
+                <label>Mô tả</label>
+                <textarea th:field="*{description}" class="form-control"></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Lưu Video</button>
+            <a th:href="@{/admin/video}" class="btn btn-secondary">Hủy</a>
+        </form>
+    </div>
+</main>
+</body>
+</html>

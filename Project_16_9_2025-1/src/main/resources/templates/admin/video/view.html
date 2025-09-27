@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<body>
+<main layout:fragment="content">
+    <div class="container mt-4">
+        <h2>Chi tiết Video</h2>
+        <ul class="list-group">
+            <li class="list-group-item"><strong>ID:</strong> <span th:text="${video.id}"></span></li>
+            <li class="list-group-item"><strong>Tiêu đề:</strong> <span th:text="${video.title}"></span></li>
+            <li class="list-group-item"><strong>Danh mục:</strong> <span th:text="${video.category.name}"></span></li>
+            <li class="list-group-item"><strong>Mô tả:</strong> <span th:text="${video.description}"></span></li>
+            <li class="list-group-item">
+                <strong>Video:</strong>
+                <video width="480" controls>
+                    <source th:src="@{${video.url}}" type="video/mp4">
+                    Trình duyệt của bạn không hỗ trợ thẻ video.
+                </video>
+            </li>
+            <li class="list-group-item"><strong>URL:</strong> <a th:href="@{${video.url}}" target="_blank" th:text="${video.url}"></a></li>
+            </ul>
+        <a th:href="@{/admin/video}" class="btn btn-secondary mt-3">Quay lại</a>
+    </div>
+</main>
+</body>
+</html>

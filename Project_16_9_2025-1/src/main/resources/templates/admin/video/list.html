@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Danh sách Video</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="mb-0">Danh sách Video</h2>
+            <a th:href="@{/admin/home}" class="btn btn-secondary">🏠 Home</a>
+        </div>
+        <a th:href="@{/admin/video/add}" class="btn btn-success mb-3">➕ Thêm Video</a>
+        
+        <form th:action="@{/admin/video}" method="get" class="row mb-3">
+            <div class="col-md-4">
+                <input type="text" name="keyword" th:value="${keyword}" placeholder="Tìm theo tiêu đề..." class="form-control"/>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-info">Tìm kiếm</button>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Tiêu đề</th>
+                    <th>Danh mục</th>
+                    <th>Mô tả</th>
+                    <th>Video</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="video : ${videoPage.content}"> 
+                    <td th:text="${video.id}"></td>
+                    <td th:text="${video.title}"></td>
+                    <td th:text="${video.category?.name}"></td>
+                    <td th:text="${video.description}"></td>
+                    <td>
+			            <video width="200" height="120" controls>
+			                <source th:src="@{${video.url}}" type="video/mp4"> 
+                            Trình duyệt không hỗ trợ video.
+			            </video>
+			        </td>
+                    <td>
+                        <a th:href="@{|/admin/video/view/${video.id}|}" class="btn btn-info btn-sm">👁 Xem</a>
+                        <a th:href="@{|/admin/video/edit/${video.id}|}" class="btn btn-warning btn-sm">✏ Sửa</a>
+                        <a th:href="@{|/admin/video/delete/${video.id}|}" class="btn btn-danger btn-sm"
+                           onclick="return confirm('Xóa video này?')">🗑 Xóa</a>
+                    </td>
+                </tr>
+                <tr th:if="${videoPage.content.empty}">
+                    <td colspan="6" class="text-center">Không tìm thấy video nào.</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <nav aria-label="Page navigation" th:if="${videoPage.totalPages > 1}">
+            <ul class="pagination">
+                <li class="page-item" th:classappend="${videoPage.number == 0 ? 'disabled' : ''}">
+                    <a class="page-link" th:href="@{/admin/video(page=${videoPage.number - 1}, keyword=${keyword})}">Trước</a>
+                </li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(0, videoPage.totalPages - 1)}"
+                    th:classappend="${i == videoPage.number ? 'active' : ''}">
+                    <a class="page-link" th:href="@{/admin/video(page=${i}, keyword=${keyword})}" th:text="${i + 1}"></a>
+                </li>
+                <li class="page-item" th:classappend="${videoPage.number + 1 == videoPage.totalPages ? 'disabled' : ''}">
+                    <a class="page-link" th:href="@{/admin/video(page=${videoPage.number + 1}, keyword=${keyword})}">Sau</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</main>
+</body>
+</html>

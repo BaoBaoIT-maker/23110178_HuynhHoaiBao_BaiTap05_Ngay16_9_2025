@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout}">
+<head>
+    <title>User Home</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <div class="bg-success text-white text-center py-5 mb-4">
+        <div class="container">
+            <h1 class="display-4 fw-bold">👋 Xin chào <span th:text="${session.account.fullName}"></span></h1>
+            <p class="lead">Chào mừng đến với trang dành cho User</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="fw-bold">Các chức năng người dùng</h5>
+                <ul>
+                    <li>Xem video</li>
+                    <li>Xem danh mục</li>
+                    <li>Cập nhật thông tin cá nhân</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
