@@ -34,12 +34,25 @@ public class AuthController {
         }
         session.setAttribute("account", u);
 
-        if (u.getRole() == "ADMIN") {
-            return "redirect:/admin/home";
-        } else if (u.getRole() == "MANAGER") {
-            return "redirect:/manager/home";
+        if ("ADMIN".equals(u.getRole())) {
+            // Trả về view: templates/admin/home.html
+            return "redirect:/admin/home"; 
+            
+        } else if ("MANAGER".equals(u.getRole())) {
+            // Trả về view: templates/manager/home.html
+            // Lưu ý: Đảm bảo bạn có mapping cho /manager/home
+            return "redirect:/manager/home"; 
+            
+        } else if ("USER".equals(u.getRole())) {
+            // Trả về view: templates/user/home.html
+            // Lưu ý: Đảm bảo bạn có mapping cho /user/home
+            return "redirect:/user/home";
+            
         } else {
-            return "redirect:/admin/home";
+            // Trường hợp role không xác định (Mặc định)
+            model.addAttribute("alert", "Vai trò người dùng không xác định.");
+            session.invalidate(); // Hủy session
+            return "auth/login";
         }
     }
     @GetMapping("/forgot-password")
